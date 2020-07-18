@@ -15,7 +15,7 @@ RUN wget "https://github.com/bramley/phplist-plugin-amazonses/archive/master.zip
 RUN unzip phplist-plugin-amazonses.zip
 RUN mv phplist-plugin-amazonses-master/plugins/** phplist/admin/plugins/
 
-COPY . .
+COPY ./config_extended.php .
 
 RUN cat config_extended.php >> phplist/config/config.php
 

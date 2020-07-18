@@ -21,8 +21,11 @@ RUN cat config_extended.php >> phplist/config/config.php
 
 FROM php:7.4-apache
 
-RUN apt-get update && apt-get install -y git
-RUN docker-php-ext-install pdo pdo_mysql mysqli
+# https://stackoverflow.com/questions/52314179/errors-when-installing-imap-extension-on-official-php-docker-image
+RUN apt-get update && apt-get install -y git libc-client-dev libkrb5-dev && rm -r /var/lib/apt/lists/*
+
+RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
+RUN docker-php-ext-install pdo pdo_mysql mysqli imap
 RUN a2enmod rewrite
 
 COPY --from=build /build/phplist/ /var/www/html/

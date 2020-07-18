@@ -12,6 +12,18 @@ else
   exit 1;
 fi
 
+if [[ -z "${DATABASE_CONNECTION_SSL}" ]] || [[ "${DATABASE_CONNECTION_SSL}" == "true" ]]; then
+  # Database SSL set (or defaults) to true
+  # This is the default in config.php. Do nothing here
+  :
+elif [[ "${DATABASE_CONNECTION_SSL}" == "false" ]]; then
+  # Database SSL set to false
+  sed -i -e "s/\$database_connection_ssl = true;/\$database_connection_ssl = ${DATABASE_CONNECTION_SSL};/g" /var/www/html/config/config.php
+else
+  echo "Invalid DATABASE_CONNECTION_SSL: ${DATABASE_CONNECTION_SSL}. Valid values are: \"true\", \"false\"";
+  exit 1;
+fi
+
 if [[ -n "${DATABASE_HOST}" ]]; then
   sed -i -e "s/\$database_host = 'dbhost';/\$database_host = '${DATABASE_HOST}';/g" /var/www/html/config/config.php
 else

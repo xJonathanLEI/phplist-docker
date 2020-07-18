@@ -37,6 +37,15 @@ Whether to run phplist in test mode. Can be one of the following:
 
 Defaults to `false`
 
+### DATABASE_CONNECTION_SSL
+
+Whether to use SSL for database connection. Can be one of the following:
+
+- true
+- false
+
+Defaults to `true`
+
 ### MESSAGE_ENVELOPE
 
 Message envelope email address.

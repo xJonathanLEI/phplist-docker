@@ -10,21 +10,21 @@ Built images are available at [Docker Hub](https://hub.docker.com/r/xjonathanlei
 
 ## Mandatory Environment Variables
 
-### MYSQL_HOST
+### DATABASE_HOST
 
-MySQL host including port in format: `localhost:3306`.
+Database host including port in format: `localhost:3306`.
 
-### MYSQL_DATABASE
+### DATABASE_NAME
 
-MySQL database name.
+Database database name.
 
-### MYSQL_USERNAME
+### DATABASE_USER
 
-MySQL username.
+Database username.
 
-### MYSQL_PASSWORD
+### DATABASE_PASSWORD
 
-MySQL password. You must supply a MySQL password either through environment variable `MYSQL_PASSWORD` or Docker Secret introduced below. If both are supplied, the environment variable value is ignored.
+Database password. You must supply a database password either through environment variable `DATABASE_PASSWORD` or Docker Secret introduced below. If both are supplied, the environment variable value is ignored.
 
 ## Optional Environment Variables
 
@@ -78,7 +78,7 @@ Path to mbox file used for bonuces. Used when `BOUNCE_PROTOCOL` is `mbox`.
 
 If you're deploying this image in Docker Swarm, you can set the following config options with [Docker Secret](https://docs.docker.com/engine/swarm/secrets/):
 
-- `MYSQL_PASSWORD`
+- `DATABASE_PASSWORD`
 - `BOUNCE_MAILBOX_PASSWORD`
 
-Simply set the secret `target` to the option name (e.g. `MYSQL_PASSWORD`).
+Simply set the secret `target` to the option name (e.g. `DATABASE_PASSWORD`).

@@ -12,34 +12,34 @@ else
   exit 1;
 fi
 
-if [[ -n "${MYSQL_HOST}" ]]; then
-  sed -i -e "s/\$database_host = 'dbhost';/\$database_host = '${MYSQL_HOST}';/g" /var/www/html/config/config.php
+if [[ -n "${DATABASE_HOST}" ]]; then
+  sed -i -e "s/\$database_host = 'dbhost';/\$database_host = '${DATABASE_HOST}';/g" /var/www/html/config/config.php
 else
-  echo "Environment variable MYSQL_HOST is mandatory";
+  echo "Environment variable DATABASE_HOST is mandatory";
   exit 1;
 fi
 
-if [[ -n "${MYSQL_DATABASE}" ]]; then
-  sed -i -e "s/\$database_name = 'phplistdb';/\$database_name = '${MYSQL_DATABASE}';/g" /var/www/html/config/config.php
+if [[ -n "${DATABASE_NAME}" ]]; then
+  sed -i -e "s/\$database_name = 'phplistdb';/\$database_name = '${DATABASE_NAME}';/g" /var/www/html/config/config.php
 else
-  echo "Environment variable MYSQL_DATABASE is mandatory";
+  echo "Environment variable DATABASE_NAME is mandatory";
   exit 1;
 fi
 
-if [[ -n "${MYSQL_USERNAME}" ]]; then
-  sed -i -e "s/\$database_user = 'phplist';/\$database_user = '${MYSQL_USERNAME}';/g" /var/www/html/config/config.php
+if [[ -n "${DATABASE_USER}" ]]; then
+  sed -i -e "s/\$database_user = 'phplist';/\$database_user = '${DATABASE_USER}';/g" /var/www/html/config/config.php
 else
-  echo "Environment variable MYSQL_USERNAME is mandatory";
+  echo "Environment variable DATABASE_USER is mandatory";
   exit 1;
 fi
 
-if [[ -f /run/secrets/MYSQL_PASSWORD ]]; then
-  PASSWORD_FROM_DOCKER_SECRET=$(cat /run/secrets/MYSQL_PASSWORD)
+if [[ -f /run/secrets/DATABASE_PASSWORD ]]; then
+  PASSWORD_FROM_DOCKER_SECRET=$(cat /run/secrets/DATABASE_PASSWORD)
   sed -i -e "s/\$database_password = 'phplist';/\$database_password = '${PASSWORD_FROM_DOCKER_SECRET}';/g" /var/www/html/config/config.php
-elif [[ -n "${MYSQL_PASSWORD}" ]]; then
-  sed -i -e "s/\$database_password = 'phplist';/\$database_password = '${MYSQL_PASSWORD}';/g" /var/www/html/config/config.php
+elif [[ -n "${DATABASE_PASSWORD}" ]]; then
+  sed -i -e "s/\$database_password = 'phplist';/\$database_password = '${DATABASE_PASSWORD}';/g" /var/www/html/config/config.php
 else
-  echo "Environment variable MYSQL_PASSWORD is mandatory";
+  echo "Environment variable DATABASE_PASSWORD is mandatory";
   exit 1;
 fi
 

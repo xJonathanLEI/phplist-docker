@@ -4,10 +4,16 @@ ENV PHPLIST_VERSION 3.5.5
 
 WORKDIR /build
 
-RUN apt-get update && apt-get install -y wget
+RUN apt-get update && apt-get install -y wget unzip
 RUN wget "https://sourceforge.net/projects/phplist/files/phplist/${PHPLIST_VERSION}/phplist-${PHPLIST_VERSION}.tgz"
 RUN tar -zxf phplist-${PHPLIST_VERSION}.tgz
 RUN mkdir phplist && mv phplist-${PHPLIST_VERSION}/public_html/lists/** phplist
+
+# Install phplist-plugin-amazonses
+
+RUN wget "https://github.com/bramley/phplist-plugin-amazonses/archive/master.zip" && mv master.zip phplist-plugin-amazonses.zip
+RUN unzip phplist-plugin-amazonses.zip
+RUN mv phplist-plugin-amazonses-master/plugins/** phplist/admin/plugins/
 
 COPY . .
 

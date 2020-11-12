@@ -1,6 +1,6 @@
-FROM ubuntu:18.04 AS build
+FROM ubuntu:20.04 AS build
 
-ENV PHPLIST_VERSION 3.5.7
+ENV PHPLIST_VERSION 3.5.8
 
 WORKDIR /build
 
